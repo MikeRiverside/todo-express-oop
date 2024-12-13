@@ -5,5 +5,6 @@ const router = Router()
 
 router.post("/new-todo", (req, res) => TodoContoller.createTodo(req, res))
 router.get("/", (req, res) => TodoContoller.getTodos(req, res))
+router.patch("/:id", (req, res) => TodoContoller.updateTodo(req, res))
 
 export default router

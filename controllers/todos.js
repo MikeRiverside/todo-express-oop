@@ -17,6 +17,28 @@ class todoController {
     getTodos(req, res){
         res.json({tasks: this.TODOS})
     }
+    updateTodo(req, res){
+        const todoId = req.params.id
+        const updatedTask = req.body.task
+
+        console.log(req.body)
+        console.log(req.params)
+
+        const todoIndex = this.TODOS.findIndex((todo) => todo.id === todoId)
+
+        if(todoIndex < 0){
+            res.json({
+                message: "Ei leidnud sellist indeksit"
+            })
+            throw new Error("Ei leidnud tegevust")
+        }
+
+        this.TODOS[todoIndex] = new Todo(this.TODOS[todoIndex].id, updatedTask)
+        res.json({
+            message: "Tegevus on uuendatud",
+            updatedTask: this.TODOS[todoIndex]
+        })
+    }
 }    
 
 
