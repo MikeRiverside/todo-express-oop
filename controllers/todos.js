@@ -39,6 +39,28 @@ class todoController {
             updatedTask: this.TODOS[todoIndex]
         })
     }
+    deleteTodo(req, res){
+        const todoId = req.params.id
+        const deletedTask = req.body.task
+
+        console.log(req.body)
+        console.log(req.params)
+
+        const todoIndex = this.TODOS.findIndex((todo) => todo.id === todoId)
+
+        if(todoIndex < 0){
+            res.json({
+                message: "Ei leidnud sellist indeksit"
+            })
+            throw new Error("Ei leidnud tegevust")
+        }
+
+        this.TODOS.splice(todoIndex, 1)
+        res.json({
+            message: "Tegevus on kustutatud",
+            updatedTask: this.TODOS[todoIndex]
+        })
+    }
 }    
 
 
